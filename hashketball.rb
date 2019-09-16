@@ -158,6 +158,7 @@ def num_points_scored(name)
   end
 end
 
+
 def shoe_size(name)
    game_hash.each do |location,team_data|
     team_data[:players].each do |player_info|
@@ -176,6 +177,7 @@ def team_colors(team_name)
   end
 end
 
+
 def team_names
   teams_array=[]
   game_hash.each do |location,team_data|
@@ -183,6 +185,15 @@ def team_names
   end
   teams_array
 end
+
+=begin
+def team_names
+  game_hash.collect do |location,team_data|
+    team_data[:team_name]
+  end
+end
+=end
+
 
 def player_numbers(team_name)
   jersey_arr=[]
@@ -196,6 +207,24 @@ def player_numbers(team_name)
   jersey_arr
 end
 
+=begin
+def player_numbers(team_name)
+  jersey_arr = []
+  game_hash.each do |location,team_data|
+    next unless team_data[:team_name] == team_name
+
+    team_data.each do |attribute, data|
+      next unless attribute == :players
+
+      data.each do |data|
+        jersey_arr << data[:number]
+      end
+    end
+  end
+  jersey_arr
+end
+=end
+=begin
 def player_stats(name)
   game_hash.each do |location,team_data|
     team_data[:players].each do |player_info|
@@ -205,6 +234,29 @@ def player_stats(name)
     end
   end
 end
+=end
+
+def player_stats(name)
+  player_hash={}
+  game_hash.each do |location,team_data|
+    team_data.each do |key, data|
+      next unless key == :players
+      
+      
+      binding.pry
+    end
+  end
+end
+
+
+
+
+
+
+
+
+
+
 
 def big_shoe_rebounds
   biggest_shoe=0
@@ -261,7 +313,6 @@ def winning_team
   elsif totals[0]<totals[1]
     game_hash[:away][:team_name]
   end
-  
 end
 
 def player_with_longest_name
